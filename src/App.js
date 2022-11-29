@@ -6,16 +6,19 @@ import KosarModel from './model/kosarModel';
 
 const konyvTomb = [
   {
+    id: 1,
     cim: "Malevil",
     szerzo: "Robert Merle",
     ar: 2111
   },
   {
+    id: 2,
     cim: "Védett férfiak",
     szerzo: "Robert Merle",
     ar: 1111
   },
   {
+    id: 3,
     cim: "Állati elmék",
     szerzo: "Robert Merle",
     ar: 3111
@@ -32,9 +35,11 @@ function App() {
   //KosarModell osztály példányosítása
   const kosarModel = new KosarModel(kosaram)
 
+
+
+
   function kosarKezeles(adat) {
-    
-    /**összár */
+
     kosarModel.setKosar(adat)
     setKosaram(kosarModel.getKosar())
     console.log(kosaram)
@@ -42,7 +47,10 @@ function App() {
     setDb(kosarModel.getDb())
     setOsszar(kosarModel.getOsszar())
   }
-
+  function novel(adat) {
+    console.log(adat)
+    //itt kell meghívni a modell megfelelő tagfüggvényét]
+  }
   return (
     <div className="App">
       <header className="App-header">
@@ -58,6 +66,8 @@ function App() {
               <th>Cím</th>
               <th>Ár</th>
               <th>Db</th>
+              <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -66,6 +76,7 @@ function App() {
                 <Kosar
                   kosar={elem}
                   key={index}
+                  novel={novel}
                 />
               );
             })}
