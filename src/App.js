@@ -33,7 +33,7 @@ function App() {
   const [osszAr, setOsszar] = useState(0);
   const [kosaram, setKosaram] = useState([]);
   //KosarModell osztály példányosítása
-  const kosarModel = new KosarModel(kosaram)
+  const kosarModel = new KosarModel(kosaram, db)
 
 
 
@@ -47,10 +47,24 @@ function App() {
     setDb(kosarModel.getDb())
     setOsszar(kosarModel.getOsszar())
   }
+
   function novel(adat) {
     console.log(adat)
+    kosarModel.setKosarPlusz(adat);
     //itt kell meghívni a modell megfelelő tagfüggvényét]
+   
   }
+
+  function csokken(adat) {
+    console.log(adat)
+    kosarModel.setKosarMinusz(adat)
+ 
+  }
+
+  function torol(adat) {
+    kosarModel.setDelete(adat);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -68,6 +82,7 @@ function App() {
               <th>Db</th>
               <th></th>
               <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -76,7 +91,10 @@ function App() {
                 <Kosar
                   kosar={elem}
                   key={index}
+                  //db={db}
                   novel={novel}
+                  csokken={csokken}
+                  torol={torol}
                 />
               );
             })}
@@ -87,9 +105,7 @@ function App() {
         {
           konyvTomb.map((konyv, index) => {
             return (<Konyv konyvObj={konyv} key={index} kosarKezeles={kosarKezeles} />)
-          }
-          )
-        }
+          })}
       </article>
       <footer>
         <p>saját név</p>
